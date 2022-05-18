@@ -16,10 +16,16 @@ import {getStorage, provideStorage} from '@angular/fire/storage';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioComponent } from './usuario.component';
-import {FormsModule} from '@angular/forms';
 import {LibrosComponent} from './libros/libros.component'
 import {LibroComponent} from './libro/libro.component'
-import {environment} from '@src/environments/environment'
+import {environment} from '@src/environments/environment';
+import { EmployeeComponent } from './employee/employee.component';
+import { ShowEmpComponent } from './employee/show-emp/show-emp.component';
+import { AddEditEmpComponent } from './employee/add-edit-emp/add-edit-emp.component'
+
+import {SharedService} from './shared.service'
+import {HttpClientModule} from '@angular/common/http'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   // Pasar componentes web que quiero desplegar en el html
@@ -27,13 +33,18 @@ import {environment} from '@src/environments/environment'
     AppComponent,
     UsuarioComponent,
     LibrosComponent,
-    LibroComponent
+    LibroComponent,
+    EmployeeComponent,
+    ShowEmpComponent,
+    AddEditEmpComponent
   ],
   // Módulos o directivas que se usarán en el proyecto
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase.config) ),
     provideFirestore(() => getFirestore()),
@@ -47,8 +58,9 @@ import {environment} from '@src/environments/environment'
 
   ],
   // Servicios que se van a incluir en el proyecto
-  providers: [],
+  providers: [SharedService],
   // Cuál es el componente principal de la aplicación
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
