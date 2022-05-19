@@ -8,13 +8,10 @@ import { Observable } from 'rxjs';
 
 export class SharedService {
 
-  constructor(private http:HttpClient) { console.log('Probando consumo de API') }
+  constructor(private http:HttpClient) { }
 
-  getEmployeeList() {
-    let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
-
-    return this.http.get( 'api/employe/list', {headers:header});
+  getEmployeeList():Observable<any[]> {
+    return this.http.get<any[]>('api/employe/list');
   }
 
   detailEmployee(val:any) {
@@ -26,11 +23,11 @@ export class SharedService {
   }
 
   updateEmployee(val:any) {
-    return this.http.put('api/employe/update',val);
+    return this.http.put('/api/employe/update/', val);
   }
 
   deleteEmployee(val:any) {
-    return this.http.delete('api/employe/delete',val);
+    return this.http.delete('api/employe/delete/'+ val);
   }
 
 }
